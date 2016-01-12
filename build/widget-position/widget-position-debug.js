@@ -107,6 +107,7 @@ YUI.add('widget-position', function (Y, NAME) {
     Position.prototype = {
 
         initializer : function() {
+            Y.log("Widget-position initializing.", 'info', 'widget');
             this._posNode = this.get(BOUNDING_BOX);
 
             // WIDGET METHOD OVERLAP
@@ -138,6 +139,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @protected
          */
         _syncUIPosition : function() {
+            Y.log("Widget-position _syncUIPosition.", 'info', 'widget');
             var posNode = this._posNode;
             if (posNode.getStyle(POSITION) === RELATIVE) {
                 this.syncXY();
@@ -156,6 +158,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @protected
          */
         _bindUIPosition :function() {
+            Y.log("Widget-position _bindUIPosition.", 'info', 'widget');
             this.after(XYChange, this._afterXYChange);
         },
 
@@ -169,6 +172,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @param {Number} [y] The new y position
          */
         move: function () {
+            Y.log("Widget-position move " + Y.dump(arguments), 'info', 'widget');
             var args = arguments,
                 coord = (Lang.isArray(args[0])) ? args[0] : [args[0], args[1]];
                 this.set(XY_COORD, coord);
@@ -181,6 +185,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @method syncXY
          */
         syncXY : function () {
+            Y.log("Widget-position syncXY.", 'info', 'widget');
             this.set(XY_COORD, this._posNode.getXY(), {src: UI});
         },
 
@@ -193,6 +198,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @return {boolean} true if valid, false if not.
          */
         _validateXY : function(val) {
+            Y.log("Widget-position _validateXY " + Y.dump(val), 'info', 'widget');
             return (Lang.isArray(val) && Lang.isNumber(val[0]) && Lang.isNumber(val[1]));
         },
 
@@ -205,6 +211,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @param {Number} val The X page co-ordinate value
          */
         _setX : function(val) {
+            Y.log("Widget-position _setX Setting X: " + val, 'info', 'widget');
             this.set(XY_COORD, [val, this.get(XY_COORD)[1]]);
         },
 
@@ -217,6 +224,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @param {Number} val The Y page co-ordinate value
          */
         _setY : function(val) {
+            Y.log("Widget-position _setY Setting Y: " + val, 'info', 'widget');
             this.set(XY_COORD, [this.get(XY_COORD)[0], val]);
         },
 
@@ -229,6 +237,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @return {Number} The X page co-ordinate value
          */
         _getX : function() {
+            Y.log("Widget-position _getX.", 'info', 'widget');
             return this.get(XY_COORD)[0];
         },
 
@@ -241,6 +250,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @return {Number} The Y page co-ordinate value
          */
         _getY : function() {
+            Y.log("Widget-position _getY.", 'info', 'widget');
             return this.get(XY_COORD)[1];
         },
 
@@ -253,6 +263,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @param {EventFacade} e The event facade for the attribute change
          */
         _afterXYChange : function(e) {
+            Y.log("Widget-position _afterXYChange.", 'info', 'widget');
             if (e.src != UI) {
                 this._uiSetXY(e.newVal);
             }
@@ -266,6 +277,7 @@ YUI.add('widget-position', function (Y, NAME) {
          * @param {String} val The XY page co-ordinates value to be reflected in the UI
          */
         _uiSetXY : function(val) {
+            Y.log("Widget-position _uiSetXY Setting XY: " + val, 'info', 'widget');
             this._posNode.setXY(val);
         }
     };

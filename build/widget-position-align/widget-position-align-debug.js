@@ -299,6 +299,7 @@ PositionAlign.prototype = {
     @chainable
     **/
     align: function (node, points) {
+        Y.log("Widget-Position-Align align passing node: " + Y.dump(node) + ' and points: ' + Y.dump(points), 'info', 'widget');
         if (arguments.length) {
             // Set the `align` Attribute.
             this.set(ALIGN, {
@@ -306,6 +307,7 @@ PositionAlign.prototype = {
                 points: points
             });
         } else {
+            Y.log("Widget-Position-Align align in else loop", 'info', 'widget');
             // Sync the current `align` Attribute value to the DOM.
             this._syncUIPosAlign();
         }
@@ -324,6 +326,7 @@ PositionAlign.prototype = {
     @chainable
     **/
     centered: function (node) {
+        Y.log("Widget-Position-Align centered: " + val, 'info', 'widget');
         return this.align(node, [PositionAlign.CC, PositionAlign.CC]);
     },
 
@@ -339,6 +342,7 @@ PositionAlign.prototype = {
     @protected
     **/
     _setAlignCenter: function (val) {
+         Y.log("Widget-Position-Align _setAlignCenter: " + val, 'info', 'widget');
         if (val) {
             this.set(ALIGN, {
                 node  : val === true ? null : val,
@@ -362,6 +366,7 @@ PositionAlign.prototype = {
     @protected
     **/
     _uiSetAlign: function (node, points) {
+        Y.log("Widget-Position-Align _uiSetAlign passing node: " + Y.dump(node) + ' and points: ' + Y.dump(points), 'info', 'widget');
         if ( ! Lang.isArray(points) || points.length !== 2) {
             Y.error('align: Invalid Points Arguments');
             return;
@@ -425,6 +430,7 @@ PositionAlign.prototype = {
             break;
 
         case PositionAlign.CC:
+            Y.log("Widget-Position-Align _uiSetAlign case: PositionAlign.CC. nodeRegion of node: " + Y.dump(node) + ' ' + Y.dump(nodeRegion), 'info', 'widget');
             xy = [
                 nodeRegion.left + Math.floor(nodeRegion.width / 2),
                 nodeRegion.top + Math.floor(nodeRegion.height / 2)
@@ -516,6 +522,7 @@ PositionAlign.prototype = {
     @private
     **/
     _doAlign: function (widgetPoint, x, y) {
+         Y.log("Widget-Position-Align _doAlign passing widgetPoint: " + Y.dump(widgetPoint) + ' and x and y: ' + Y.dump(x) + ' ' + + Y.dump(y), 'info', 'widget');
         var widgetNode = this._posNode,
             xy;
 
@@ -574,6 +581,7 @@ PositionAlign.prototype = {
             break;
 
         case PositionAlign.CC:
+            Y.log("Widget-Position-Align _doAlign with PositionAlign.CC. widgetNode: " + Y.dump(widgetNode.get('innerHTML')), 'info', 'widget');
             xy = [
                 x - (widgetNode.get(OFFSET_WIDTH) / 2),
                 y - (widgetNode.get(OFFSET_HEIGHT) / 2)
@@ -602,6 +610,7 @@ PositionAlign.prototype = {
     @private
     **/
     _getRegion: function (node) {
+        Y.log("Widget-Position-Align _getRegion of node: " + Y.dump(node), 'info', 'widget');
         var nodeRegion;
 
         if ( ! node) {
@@ -627,6 +636,7 @@ PositionAlign.prototype = {
     @protected
     **/
     _afterAlignChange: function (e) {
+        Y.log("Widget-Position-Align _afterAlignChange. Event triggered.", 'info', 'widget');
         var align = e.newVal;
         if (align) {
             this._uiSetAlign(align.node, align.points);

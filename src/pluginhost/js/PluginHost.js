@@ -69,6 +69,9 @@
                     Plugin = Plugin.fn;
                 }
 
+
+                this.publish(Plugin.name.toLowerCase() + ':plug', {broadcast: 2, fireOnce: true});
+
                 // Plugin should be fn by now
                 if (Plugin && Plugin.NS) {
                     ns = Plugin.NS;
@@ -86,6 +89,10 @@
                         // Create new instance
                         this[ns] = new Plugin(config);
                         this._plugins[ns] = Plugin;
+                        /**
+                         * @todo fire here an event "plug" with SRC=ns
+                         */
+                        this.fire(Plugin.name.toLowerCase() + ':plug');
                     }
                 }
                 else { Y.log("Attempt to plug in an invalid plugin. Host:" + this + ", Plugin:" + Plugin); }

@@ -59,6 +59,7 @@ function HistoryHTML5() {
 Y.extend(HistoryHTML5, HistoryBase, {
     // -- Initialization -------------------------------------------------------
     _init: function (config) {
+        Y.log('HTML5 _init inside YUI3 HistoryHTML5.', 'info', 'issues');
         var bookmarkedState;
 
         try {
@@ -106,7 +107,9 @@ Y.extend(HistoryHTML5, HistoryBase, {
      * @protected
      */
     _storeState: function (src, newState, options) {
+        Y.log('HTML5 _storeState evaluating SRC_POPSTATE: ' + src + ', options: ' + Y.dump(options) + ' new state: ' + Y.dump(newState), 'info', 'issues');
         if (src !== SRC_POPSTATE) {
+            Y.log('HTML5 _storeState setting pushState() or replaceState().', 'info', 'issues');
             win.history[src === SRC_REPLACE ? 'replaceState' : 'pushState'](
                 newState,
                 options.title || Y.config.doc.title || '',

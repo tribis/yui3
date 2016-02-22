@@ -1612,7 +1612,7 @@ Y.Router = Y.extend(Router, Y.Base, {
             req, res;
 
         self._url = currentURL;
-
+Y.log("_afterHistoryChange running. prevURL: " + self._url + ' currentURL: ' + currentURL , 'info', 'router');
         // Handles the awkwardness that is the `popstate` event. HTML5 browsers
         // fire `popstate` right before they fire `hashchange`, and Chrome fires
         // `popstate` on page load. If this router is not ready or the previous
@@ -1620,6 +1620,8 @@ Y.Router = Y.extend(Router, Y.Base, {
         // this `popstate` event.
         if (src === 'popstate' &&
                 (!self._ready || prevURL.replace(/#.*$/, '') === currentURL.replace(/#.*$/, ''))) {
+
+Y.log("Ignoring history:change in router: self._ready: " + Y.dump(self._ready), 'info', 'router');
 
             return;
         }

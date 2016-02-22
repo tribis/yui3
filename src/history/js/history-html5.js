@@ -115,6 +115,8 @@ Y.extend(HistoryHTML5, HistoryBase, {
                 options.title || Y.config.doc.title || '',
                 options.url || Y.config.doc.URL
             );
+        } else {
+            Y.log('HTML5 in  SRC_POPSTATE, state: ' + Y.dump(window.history.state), 'info', 'issues');
         }
 
         HistoryHTML5.superclass._storeState.apply(this, arguments);

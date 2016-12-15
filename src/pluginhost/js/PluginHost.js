@@ -69,8 +69,9 @@
                     Plugin = Plugin.fn;
                 }
 
-
-                this.publish(Plugin.name.toLowerCase() + ':plug', {broadcast: 2, fireOnce: true});
+                if (Plugin && Plugin.name) {
+                  this.publish(Plugin.name.toLowerCase() + ':plug', {broadcast: 2, fireOnce: true});
+                }
 
                 // Plugin should be fn by now
                 if (Plugin && Plugin.NS) {
@@ -92,7 +93,10 @@
                         /**
                          * @todo fire here an event "plug" with SRC=ns
                          */
-                        this.fire(Plugin.name.toLowerCase() + ':plug');
+                        if (Plugin && Plugin.name) {
+                          this.fire(Plugin.name.toLowerCase() + ':plug');
+                        }
+
                     }
                 }
                 else { Y.log("Attempt to plug in an invalid plugin. Host:" + this + ", Plugin:" + Plugin); }
